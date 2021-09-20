@@ -21,6 +21,28 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
 
+  'POST /api/v1/auth/login': {action: 'auth/login'},
+  'POST /api/v1/auth/reset/password': {action: 'auth/reset-password'},
+  'GET /api/v1/auth/check/token': {action: 'auth/check-token'},
+  'PUT /api/v1/auth/change/password': {action: 'auth/change-password'},
+  'DELETE /api/v1/auth/logout': {action: 'auth/logout'},
+  
+  'POST /api/v1/account/create': { action: 'account/create'},
+  'GET /api/v1/account': {action: 'account/index'},
+  'GET /api/v1/account/display': {action: 'account/display'},
+  'GET /api/v1/account/get/infor': {action: 'account/get-infor'},
+  'PUT /api/v1/account/update/:accountId': {action: 'account/update'},
+  'DELETE /api/v1/account/delete/:accountId': {action: 'account/delete'},
+
+  'GET /api/v1/profile/display': {action: 'profile/display-infor'},
+  'PUT /api/v1/profile/update': {action: 'profile/update-infor'},
+
+  'POST /api/v1/role/create': { action: 'role/create'},
+  'GET /api/v1/role': {action: 'role/index'},
+  'DELETE /api/v1/role/delete/:roleId': {action: 'role/delete'},
+
+  'GET /api/v1/auth/facebook': 'passport/FacebookController.facebookAuth',
+  'GET /api/v1/auth/facebook/callback': 'passport/FacebookController.facebookCallback',
 
   /***************************************************************************
   *                                                                          *

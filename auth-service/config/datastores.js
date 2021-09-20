@@ -12,7 +12,6 @@
  * For more information on configuring datastores, check out:
  * https://sailsjs.com/config/datastores
  */
-
 module.exports.datastores = {
 
 
@@ -53,7 +52,7 @@ module.exports.datastores = {
     port: 5432,
     user: 'postgres',
     password: 'root',
-    database: 'auth_db'
+    database: 'auth_db',
     // url: 'postgres://postgres:root@localhost:5432/auth_db',
 
   },

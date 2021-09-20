@@ -27,12 +27,13 @@ module.exports = {
     },
 
     getDataFromToken: function(token, callback) {
-        jwtToken.verifyToken(token, function(err, data) {
+        let payload;
+        jwToken.verifyToken(token, function(err) {
             if (err) {
                 return callback(err);
             }
-            const payload = jwt.decode(token, sails.config.secret);
-            return payload.sub;
+            payload = jwt.decode(token, sails.config.secret);
         });
+        return payload;
     }
 }

@@ -16,7 +16,16 @@ module.exports.policies = {
   * (`true` allows public access)                                            *
   *                                                                          *
   ***************************************************************************/
+   // '*': true,
+  'auth/*': 'isAuthorized',
+  'auth/login': true,
+  'auth/reset-password': true,
 
-  // '*': true,
+  'account/*': ['isAuthorized', 'isAdmin'],
+  'account/display': 'isAuthorized',
+  'account/get-infor': 'isAuthorized',
 
+  'profile/*': 'isAuthorized',
+
+  'role/*': ['isAuthorized', 'isAdmin'],
 };

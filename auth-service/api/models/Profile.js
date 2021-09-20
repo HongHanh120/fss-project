@@ -34,7 +34,7 @@ module.exports = {
     accountId: {
       model: 'account',
       unique: true,
-      columnName: 'account_id'
+      columnName: 'account_id',
     },
     createdAt: false,
     updatedAt:false

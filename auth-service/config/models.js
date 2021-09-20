@@ -52,7 +52,6 @@ module.exports.models = {
   * > https://sailsjs.com/docs/concepts/orm/model-settings#?migrate          *
   *                                                                          *
   ***************************************************************************/
-
   datastore: 'default',
   migrate: 'safe',
 

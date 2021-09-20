@@ -1,5 +1,5 @@
 /**
- * isAuthenticated
+ * isAuthorized
  * 
  * @module : Policy
  * @description : Simple policy to require an authenticated user.
@@ -12,6 +12,7 @@ module.exports = function (req, res, next) {
     let token;
     if (req.headers && req.headers.authorization) {
         const parts = req.headers.authorization.split(' ');
+        // sails.log(parts);
         if (parts.length === 2) {
             const scheme = parts[0];
             const credentials = parts[1];
@@ -20,26 +21,31 @@ module.exports = function (req, res, next) {
                 token = credentials;
             }
         } else {
-            return res.authorizied({
-                err: 'Format is Authorization: Bearer [token].' 
+            return res.unauthorized({
+                errorCode: 'UNAUTHORIZED',
+                message: 'Format is Authorization: Bearer [token].' 
             });
         }
     } else {
-        return res.authorizied({
-            err: 'No Authorization header was found.'
+        return res.unauthorized({
+            errorCode: 'UNAUTHORIZED',
+            message: 'No Authorization header was found.'
         });
     };
-
-    jwToken.getDataFromToken(token, function(err, data) {
+    
+    const payload = jwToken.getDataFromToken(token, function(err) {
         if(err) {
-            return res.authorizied({
-                err: 'Please logout and login again.'
-            })
+            return res.unauthorized({
+                errorCode: 'UNAUTHORIZED',
+                message: 'Please logout and login again.'
+            }) 
         }
-        const payload = data;
+    });
+
+    if (payload) {
         req.userId = payload.userId;
         req.roleId = payload.roleId;
-
+        
         next();
-    })
+    }
 }
