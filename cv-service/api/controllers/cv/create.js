@@ -92,8 +92,6 @@ module.exports = {
         })
       };
 
-      // console.log('existed');
-
       const CVRecord = await Cv.create({
         location: inputs.location,
         skill: inputs.skill,
@@ -130,7 +128,7 @@ module.exports = {
       if(!proLanguageRecord) {
         return exits.error({
           message: `Something went wrong when created a new programing language record.`
-        })
+        });
       };
 
       return exits.success({

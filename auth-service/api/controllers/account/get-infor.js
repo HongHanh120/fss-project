@@ -28,6 +28,10 @@ module.exports = {
       responseType: 'notFound',
     },
 
+    badRequest: {
+      responseType: 'badRequest',
+    },
+
     forbidden: {
       responseType: 'forbidden',
     },
@@ -37,6 +41,11 @@ module.exports = {
   fn: async function (inputs, exits) {
     try {
       let accountId = this.req.query.accountId;
+      if(!accountId) {
+        return exits.badRequest({
+          message: 'Query parameters accountId is empty.'
+        })
+      };
 
       let accountRecord = await Account.findOne({
         id: accountId

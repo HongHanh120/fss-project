@@ -29,4 +29,5 @@ module.exports.policies = {
   'tagname/index': 'isAuthorized',
 
   'cv-tagname/*': ['isAuthorized', 'isUser'],
+  'cv-tagname/search': ['isAuthorized', 'isAdmin'],
 };

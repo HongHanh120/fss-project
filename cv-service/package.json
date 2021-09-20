@@ -12,13 +12,15 @@
     "grunt": "1.0.4",
     "json2csv": "^5.0.6",
     "moment": "^2.29.1",
+    "nested-pop": "^0.1.4",
     "nodemon": "^2.0.12",
     "request": "^2.88.2",
     "sails": "^1.4.4",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^3.0.2",
     "sails-hook-sockets": "^2.0.0",
-    "sails-postgresql": "^2.0.0"
+    "sails-postgresql": "^2.0.0",
+    "waterline": "github:Atlantis-Software/waterline#deepPopulate"
   },
   "devDependencies": {
     "eslint": "5.16.0"

@@ -1,3 +1,5 @@
+const nestedPop = require('nested-pop');
+
 module.exports = {
 
 
@@ -65,7 +67,7 @@ module.exports = {
 
       if(existedCvTagname) {
         return exits.notFound({
-          code: 'E_UNIQUE',
+          code: 'NOT_FOUND',
           message: `Tagname id ${inputs.tagnameId} has already in this CV ${existedCV.id}.`,
         })
       };
@@ -81,31 +83,25 @@ module.exports = {
         })
       }
       
-      const populatedRecord = await CvTagname.findOne({
+      await CvTagname.findOne({
         cv: record.cv,
         tagname: record.tagname,
       })
       .populate('cv')
-      .populate('tagname');
-      // .then(function (cvtagname){
-      //   const cv = Cv.findOne({
-      //     id: cvtagname.cv
-      //   })
-      //   .populate('experiences')
-      //   .populate('programingLanguages')
-      //   .then(function(cv) {
-      //     return cv;
-      //   })
-      //   return [cvtagname, cv];
-      // })
-      // .spread(function(cvtagname, cv) {
-      //   cvtagname = cvtagname.toObject();
-      //   cvtagname.cv = cv;
-      //   return exits.success(populatedRecord); 
-      // });
-
-      return exits.success(populatedRecord);
-
+      .populate('tagname')
+      .then(function(populatedRecord) {
+        return nestedPop(populatedRecord, {
+          cv: [
+            'experiences', 'programingLanguages'
+          ]
+        }).then(function(populatedRecord) {
+          return exits.success(populatedRecord)
+        }).catch(function(err) {
+          throw err;
+        });
+      }).catch(function(err) {
+        throw err;
+      });
     } catch(err) {
     return exits.error(err, err.message);
     };

@@ -24,7 +24,7 @@ const request = require('request');
     
         await request.get(options, function(err, httpResponse, body){
             if (err) {
-                return httpResponse.badResquest(err);
+                return res.badRequest(err);
             } else {
                 const data = JSON.parse(body);
                 if (data.statusCode === 200) {
@@ -32,11 +32,12 @@ const request = require('request');
                     req.roleId = data.data.roleId;
                     next();
                 } else {
-                    return res.forbbiden({
-                        errorCode: 'ACCESS_DENIED',
-                        message: 'Access denied'
+                    return res.send({
+                        statusCode: data.statusCode,
+                        errorCode: data.errorCode,
+                        message: data.message,
                     });
-                }
+                };
             }
         });
     }

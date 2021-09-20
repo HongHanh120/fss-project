@@ -27,7 +27,7 @@ module.exports.routes = {
   'GET /api/v1/cv/most/view': {action: 'cv/most-view'},
   'GET /api/v1/cv/download/:id': {action: 'cv/download'},
   'PUT /api/v1/cv/update': {action: 'cv/update'},
-  // 'DELETE /api/v1/cv/delete/:id': {action: 'cv/delete'}, 
+  'DELETE /api/v1/cv/delete/:id': {action: 'cv/delete'}, 
 
   // Experience
   'POST /api/v1/cv/experience/create': {action: 'cv/experience/create'},
@@ -47,6 +47,9 @@ module.exports.routes = {
 
   // CV - Tagname 
   'POST /api/v1/cvtagname/create': {action: 'cv-tagname/create'},
+  'GET /api/v1/cvtagname/display/tagnames': {action: 'cv-tagname/display-tagnames'},
+  'GET /api/v1/cvtagname/search': {action: 'cv-tagname/search'},
+  'DELETE /api/v1/cvtagname/delete/:tagnameId': {action: 'cv-tagname/delete-tagname'},
 
   /***************************************************************************
   *                                                                          *

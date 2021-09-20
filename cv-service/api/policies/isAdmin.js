@@ -7,7 +7,7 @@
  */
 
  module.exports = function (req, res, next) {
-    //  sails.log(req.roleId);
+
      if (!req.roleId || req.roleId !== 1) {
          return res.forbidden({
              errorCode: 'ACCESS_DENIED',
