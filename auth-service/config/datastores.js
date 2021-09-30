@@ -56,6 +56,4 @@ module.exports.datastores = {
     // url: 'postgres://postgres:root@localhost:5432/auth_db',
 
   },
-
-
 };
