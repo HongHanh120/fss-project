@@ -1,10 +1,10 @@
 module.exports = {
-    datastores: {
-        adapter: 'sails-postgresql',
-        host: 'localhost',
-        port: 5432,
-        user: 'postgres',
-        password: 'root',
-        database: 'auth_db_test',
-    }
+    models: {
+        datastore: 'test',
+        migrate: 'safe',
+    },
+
+    port: 8000,
+
+    host: '127.0.0.1',
 }

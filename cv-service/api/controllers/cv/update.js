@@ -43,15 +43,15 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
-      const infor = await sails.helpers.getInforUser.with({
+      const checkedUser = await sails.helpers.getInforUser.with({
         accountId: this.req.userId,
         authHeader: this.req.headers.authorization,
       });
 
-      if(!infor) {
+      if(!checkedUser) {
         return exits.notFound({
           errorCode: 'NOT_FOUND',
-          message: `Could not find the user's infor by the given id`,
+          message: `Could not find the user's by the id in request`,
         })
       };
 

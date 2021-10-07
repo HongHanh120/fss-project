@@ -34,20 +34,26 @@ module.exports = {
 
 
   fn: async function (inputs, exits) {
-    const roleRecord = await Role.create({
-      roleName: inputs.roleName,
-    })
-    .intercept('E_UNIQUE', (err) => {
-      return exits.badRequest(err);
-    })
-    .fetch();
+    try {
+      const existedRole = await Role.findOne({ roleName: inputs.roleName });
+      if(existedRole) return exits.badRequest({
+        code: 'E_UNIQUE', 
+        message: 'There has already this role.'
+      });
 
-    if(!roleRecord) {
-      return exits.error({
-        message: 'It had problem when created a new role.'
-      })
-    };
+      const roleRecord = await Role.create({
+        roleName: inputs.roleName,
+      }).fetch();
 
-    return exits.success(roleRecord);
+      if(!roleRecord) {
+        return exits.error({
+          message: 'It had problem when created a new role.'
+        })
+      };
+
+      return exits.success(roleRecord);
+    } catch (err) {
+      return exits.error(err, err.message);
+    }
   }
 };

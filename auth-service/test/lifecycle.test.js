@@ -1,41 +1,74 @@
-const Sails = require('sails');
+var sails = require('sails');
+var async = require('async');
+const Barrels = require('barrels');
+const request = require('request');
+
+const barrels = new Barrels(process.cwd()+'/test/fixtures');
+const fixtures = barrels.data;
+const RESET_TABLES = 'TRUNCATE role RESTART IDENTITY CASCADE';
 
 // Before running any tests...
-before (function (done) {
-
-    // Increase the Mocha timeout so that Sails has enough time to lift,
-    // even if you have a bunch of assets
-    this.timeout(5000);
+before(function(done) {
+    // Increase timeout so that Sails has enough time to lift.
+    this.timeout(50000);
 
     process.env.NODE_ENV = 'test';
-    process.env.PORT = 8000;
 
-    Sails.lift({
+    sails.lift({
         // Your Sails app's configuration files will be loaded automaticailly,
         // but you can also specify any other special overrides here for testing purposes.
-
-        models: {
-            connection: 'localDiskDb',
-            migrate: 'drop',
-        }
+        hooks: { grunt: false },
     }, function(err, server) {
-        sails = server;
-        if(err) return done(err);
-
-        sails.log.infor('****** Starting tests... ******');
-        console.log('\n');
+        if(err) done(err);
+        else {
 
         // here you can load fixtures
-        // for example, you might want to create some records in the database
+        // for example, you might want to create some records ins the database;
+        
+        // Truncate role table with restarting identity
+            Role.getDatastore().sendNativeQuery(RESET_TABLES).exec(function(error) {
+                if (error) {
+                    console.log(error.message);
+                    return done(error);
+                };
+                console.log('Truncated all tables');
+            });
 
-        done(null, sails);
-    });
+            // Create admin and user role
+            const roles = fixtures.role;
+            for (let role of roles) {
+                Role.create({ roleName: role.role_name })
+                    .fetch()
+                    .then(function(role) {
+                        console.log(`Role ${role.roleName} created successfully`);
+                    })
+                    .catch(function(error) {
+                        console.log(error.messgae);
+                        return done(error);
+                    })
+            };
+            return done();
+        }
+    }); 
 });
 
-// After all tests have finished...
-after(function(done) {
+afterEach(function(done) {
+    // Destroy all the models in lifecycle.test.js
+    destroyFuncs = [];
+    for (modelName in sails.models) {
+        destroyFuncs.push(function(callback) {
+            sails.models[modelName].destroy({})
+            .exec(function(err) {
+                callback(null, err)
+            })
+        })
+    }
+    async.parallel(destroyFuncs, function(err, results) {
+        done(err);
+    })
+});
 
-    // here you can clear fixtures 
-    // for example, you might want to destroy the records you created above
+// After all tests have finished..
+after(function(done) {
     sails.lower(done);
-})
+});

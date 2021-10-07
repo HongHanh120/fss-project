@@ -24,6 +24,7 @@
     "sails-postgresql": "^2.0.0"
   },
   "devDependencies": {
+    "barrels": "^1.6.6",
     "eslint": "5.16.0",
     "mocha": "^9.1.1",
     "should": "^13.2.3",
@@ -31,9 +32,11 @@
   },
   "scripts": {
     "start": "nodemon app.js",
-    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
+    "test": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/**/*.test.js",
     "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
-    "custom-tests": "echo \"(No other custom tests yet.)\" && echo"
+    "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
+    "test:role": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/controllers/RoleController.test.js",
+    "test:accountModel": "node ./node_modules/mocha/bin/mocha test/lifecycle.test.js test/integration/models/Account.test.js"
   },
   "main": "app.js",
   "repository": {

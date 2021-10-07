@@ -1,0 +1,36 @@
+{
+    "admin" : {
+      "user_code": "B009935",
+      "password": "H.12345678",
+      "email": "admin@gmail.com",
+      "joining_date": "20-07-2020",
+      "official_date": "20-07-2020",
+      "contact_type": "phone",
+      "position": "staff",
+      "id_card": "1",
+      "role_id": "1",
+      "avatar": "avatar",
+      "profile_name": "admin",
+      "profile_phone": "012345678",
+      "profile_address": "abc",
+      "sex": "nam",
+      "date_of_birth": "20-07-2020"
+    },
+    "user" : {
+      "user_code": "B009935",
+      "password": "H.12345678",
+      "email": "user@gmail.com",
+      "joining_date": "20-07-2020",
+      "official_date": "20-07-2020",
+      "contact_type": "phone",
+      "position": "staff",
+      "id_card": "1",
+      "role_id": "2",
+      "avatar": "avatar",
+      "profile_name": "user",
+      "profile_phone": "012345678",
+      "profile_address": "abc",
+      "sex": "nam",
+      "date_of_birth": "20-07-2020"
+    }
+}

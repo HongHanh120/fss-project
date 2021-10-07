@@ -56,4 +56,13 @@ module.exports.datastores = {
     // url: 'postgres://postgres:root@localhost:5432/auth_db',
 
   },
+
+  test: {
+    adapter: 'sails-postgresql',
+    host: 'localhost',
+    port: 5432,
+    user: 'postgres',
+    password: 'root',
+    database: 'auth_db_test',
+  }
 };
