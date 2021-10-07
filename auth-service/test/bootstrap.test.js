@@ -16,18 +16,16 @@ function timeout(ms) {
 }
 
 // Before running any tests...
-before( async () => {
+before( async function() {
+    this.timeout(20000);
     // Set enviroment to test
     process.env.NODE_ENV = 'test';
 
+    await timeout(10000);
     sails.lift({
         hooks: { grunt: false },
     }, async function(err, server) {
         if(err) return err;
-        await timeout(50000);
-        // for (let i = 0; i < 1000000; i++) {
-        //     let result =await server.getDatastore('test').sendNativeQuery(QUERY);
-        // }
         return server;
     }); 
 });
