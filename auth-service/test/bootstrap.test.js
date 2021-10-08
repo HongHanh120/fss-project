@@ -21,13 +21,15 @@ before( async function() {
     // Set enviroment to test
     process.env.NODE_ENV = 'test';
 
-    await timeout(10000);
     sails.lift({
-        hooks: { grunt: false },
-    }, async function(err, server) {
-        if(err) return err;
-        return server;
-    }); 
+            hooks: { grunt: false },
+        }, 
+        await timeout(10000), 
+        async function(err, server) {
+            if(err) return err;
+            return server;
+        }
+    ); 
 });
 
 // afterEach(function(done) {

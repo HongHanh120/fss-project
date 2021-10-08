@@ -44,6 +44,9 @@ module.exports.routes = {
   'GET /api/v1/auth/facebook': 'passport/FacebookController.facebookAuth',
   'GET /api/v1/auth/facebook/callback': 'passport/FacebookController.facebookCallback',
 
+  'GET /api/message/publish': { action: 'messageBroker/sender' },
+  'GET /api/message/consume': { action: 'messageBroker/receiver' },
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
