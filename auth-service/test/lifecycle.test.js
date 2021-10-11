@@ -32,21 +32,21 @@ before(function(done) {
                     return done(error);
                 };
                 console.log('Truncated all tables');
+                const roles = fixtures.role;
+                for (let role of roles) {
+                    Role.create({ roleName: role.role_name })
+                        .fetch()
+                        .then(function(role) {
+                            console.log(`Role ${role.roleName} created successfully`);
+                        })
+                        .catch(function(error) {
+                            console.log(error.messgae);
+                            return done(error);
+                        })
+                };
             });
 
             // Create admin and user role
-            const roles = fixtures.role;
-            for (let role of roles) {
-                Role.create({ roleName: role.role_name })
-                    .fetch()
-                    .then(function(role) {
-                        console.log(`Role ${role.roleName} created successfully`);
-                    })
-                    .catch(function(error) {
-                        console.log(error.messgae);
-                        return done(error);
-                    })
-            };
             return done();
         }
     }); 

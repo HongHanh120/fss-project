@@ -28,7 +28,7 @@ module.exports = async function consumeMessage (req, res) {
 
         await channel.bindQueue(queue, exchange, '');
         const msg = await listenMessageFromQueue(queue, channel);
-        console.log(" [x] %s", msg.toString());
+        console.log(" [x] Received %s", msg.toString());
         res.send({ message: msg });
     } catch (err) {
         res.send({ message: err.message });

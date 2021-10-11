@@ -37,7 +37,8 @@
     "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
     "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
     "test:role": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/controllers/RoleController.test.js",
-    "test:accountModel": "node ./node_modules/mocha/bin/mocha test/lifecycle.test.js test/integration/models/Account.test.js"
+    "test:accountModel": "node ./node_modules/mocha/bin/mocha test/lifecycle.test.js test/integration/models/Account.test.js",
+    "test:rabbitmq": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/controllers/MessageBrokerController.test.js"
   },
   "main": "app.js",
   "repository": {

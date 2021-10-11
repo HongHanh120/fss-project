@@ -24,7 +24,7 @@ before( async function() {
     sails.lift({
             hooks: { grunt: false },
         }, 
-        await timeout(10000), 
+        // await timeout(10000), 
         async function(err, server) {
             if(err) return err;
             return server;
